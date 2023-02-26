@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <title>CCC</title>
+
+  <style>
+    #correcao{
+      position: relative;
+
+    }
+    
+    form {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+  }
+
+  input {
+    padding: 4px 8px;
+    margin: 4px;
+  }
+
+  span {
+    font-size: 18px;
+    margin: 4px;
+    font-weight: 500;
+  }
+
+  .submit {
+    font-size: 15px;
+    color: #fff;
+    background: #222;
+    padding: 6px 12px;
+    border: none;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+  </style>
+</head>
+
+<body>
+   
+
+    <div id="correcao">
+
+    <div id="meuAppVue" class="container" >
+    <center><h1>CCC - Centro de Controle de Cirugia</h1></center>
+    <select v-model="tipoSala" v-on:change="escolherTipoSala" class="form-select">
+      <option value="">Selecione...</option>
+      <option value="salas">Salas</option>
+    </select>
+
+    <ul v-for="sala in salas">
+      <li>Sala : {{ sala[0].PlaceName}} - {{ sala[0].MedicalEspec}}</li>
+    </ul>
+
+
+    <select v-model="tipoMedico" v-on:change="escolherTipoMedico" class="form-select">
+      <option value="">Selecione...</option>
+      <option value="med">Médicos</option>
+    </select>
+
+    <ul v-for="medico in medicos">
+      <li>Médico: {{ medico[6].name}} - Especialidade: {{ medico[6].email}}</li>
+    </ul>
+
+
+    <select v-model="tipoMaterial" v-on:change="escolherTipoMaterial" class="form-select">
+      <option value="">Selecione...</option>
+      <option value="material">Material</option>
+    </select>
+
+    <ul v-for="material in materiais">
+      <li>Material: {{material[0].name}} - Quantidade: {{material[0].price}}</li>
+    </ul>
+    
+
+
+ 
+  <br>
+  <br>
+
+  <center><h2>Agendar Cirurgia </h2></center>
+  <center>
+    <v-form
+      ref="form"
+      v-model="valid"
+      lazy-validation
+    >
+      <v-text-field
+        v-model="namess"
+        :counter="50"
+        :rules="nameRules"
+        label="Nome do Paciente"
+        required
+      ></v-text-field>
+  
+      <v-text-field
+        v-model="medi"
+        :rules="nameRules"
+        label="Nome do Médico"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="room"
+        :rules="nameRules"
+        label="Nome da Sala"
+        required
+      ></v-text-field>
+
+      
+      <v-text-field
+        v-model="mat"
+        :rules="materialRules"
+        label="Materiais, ex: dipirona, luvas. Obs: Não é necessário colocar a quantidade"
+        required
+      ></v-text-field>
+  
+      <v-select
+        v-model="select"
+        :items="items"
+        :rules="[v => !!v || 'Item is required']"
+        label="Item"
+        required
+      ></v-select>
+  
+      <v-checkbox
+        v-model="checkbox"
+        :rules="[v => !!v || 'You must agree to continue!']"
+        label="Urgência?"
+        required
+      ></v-checkbox>
+  
+      <v-btn
+        :disabled="!valid"
+        color="success"
+        class="mr-4"
+        @click="validate"
+      >
+        Validate
+      </v-btn>
+  
+      <v-btn
+        color="error"
+        class="mr-4"
+        @click="reset"
+      >
+        Reset Form
+      </v-btn>
+  
+      <v-btn
+        color="warning"
+        @click="resetValidation"
+      >
+        Reset Validation
+      </v-btn>
+    </v-form>
+  </center>
+
+
+
+
+  
+</div>
+</div>
+
+</body>
+
+<script>
+  var app = new Vue({  el: '#meuAppVue',
+  data: {
+    tipoSala: '',
+    salas: [],
+    tipoMedico: '',
+    medicos: [], 
+    tipoMaterial: '',
+    materiais: [],
+    valid: true,
+    namess: '',
+    nameRules: [
+      v => !!v || 'Name is required',
+      v => (v && v.length <= 50) || 'Name must be less than 50 characters',
+    ],
+    materialRules: [
+    v => !!v || 'Material is necessary',
+
+    ],
+    medi: '',
+    emailRules: [
+      v => !!v || 'E-mail is required',
+      v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+    ],
+    select: null,
+    items: [
+      'Item 1',
+      'Item 2',
+      'Item 3',
+      'Item 4',
+    ],
+    checkbox: false,
+    room: '',
+    mat: ''
+    },
+
+    methods: {
+      async escolherTipoSala() {
+        if (this.tipoSala == '') return;
+        const salasJSONURL = 'http://localhost:8080/salas';
+        const resultado = await fetch(salasJSONURL);
+        if (resultado.ok) {
+          this.salas = await resultado.json();
+        }
+      },
+
+      async escolherTipoMedico() {
+        if (this.tipoMedico == '') return;
+        const medicosJSONURL = 'http://localhost:4005/api/clients';
+        const resultado = await fetch(medicosJSONURL);
+        if (resultado.ok) {
+          this.medicos = await resultado.json();
+        }
+      },
+
+      async escolherTipoMaterial() {
+        if (this.tipoMaterial == '') return;
+        const materialJSONURL = 'http://localhost:4005/api/products/search?order=name';
+        const resultado = await fetch(materialJSONURL);
+        if (resultado.ok) {
+          this.materiais = await resultado.json();
+        }
+      },
+        async validate () {
+            this.$refs.form.validate()
+        },
+        async reset () {
+          this.$refs.form.reset()
+        },
+        async resetValidation () {
+          this.$refs.form.resetValidation()
+        },
+    }
+    
+
+      })
+
+    
+
+  
+
+
+
+</script>
+
+<script>
+
+
+
+      
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+</html>
