@@ -3,3 +3,6 @@ Para não sobrecarregar as responsabilidades realizdas pelo CCC (Controle de Cen
 
 ## Tecnologias Utilizadas: Front/Back
 <img src = "https://clinquant-sfogliatella-68dd08.netlify.app/imgs/tecs.jpg">
+<br>
+<img src = "https://clinquant-sfogliatella-68dd08.netlify.app/imgs/tecs1.jpg">
+
