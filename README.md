@@ -11,8 +11,9 @@ O sistema é puramente construido com a utilização de frameworks Javascript e 
 
 ```console
 $ npm install express
-ou uma vez que você esteja na pasta do módulo a ser trabalhado
 ```
+ou uma vez que você esteja na pasta do módulo a ser trabalhado
+
 ```console
 $ npm install express --save
 ```
