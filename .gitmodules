@@ -1,3 +1,6 @@
 [submodule "material_system"]
 	path = material_system
 	url = https://github.com/samsepiol1/material_system.git
+[submodule "medico_cadastro"]
+	path = medico_cadastro
+	url = https://github.com/samsepiol1/medico_cadastro.git
