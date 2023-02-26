@@ -6,3 +6,15 @@ Para não sobrecarregar as responsabilidades realizdas pelo CCC (Controle de Cen
 <br>
 <img src = "https://clinquant-sfogliatella-68dd08.netlify.app/imgs/tecs1.jpg">
 
+## Configurações dos Módulos
+O sistema é puramente construido com a utilização de frameworks Javascript e cada módulo possui um framework chefe que por sua vez tem suas dependências gerenciadas pelo NPM. Por padrão, o NPM é instalado junto como o Node.js. Para verificar se tanto o Node.js quanto o NPM estão instalados basta utilizar o seguinte comando: npm --version e node --version. Uma vez feita a instalação do ambiente de desenvolvimento do NodeJs e do gerenciador de pacotes NPM um módulo de extrema importância para o funcionamento do programa é o Express que irá permitir com que as diversas partes da aplicação se comuniquem entre si e é o núcleo do nosso backend. Para instalação do express basta digitar o seguinte comando:
+
+```console
+$ npm install express
+ou uma vez que você esteja na pasta do módulo a ser trabalhado
+```
+```console
+$ npm install express --save
+```
+
+
