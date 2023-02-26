@@ -7,3 +7,6 @@
 [submodule "api_local"]
 	path = api_local
 	url = https://github.com/samsepiol1/api_local.git
+[submodule "angular_cadastro_sala"]
+	path = angular_cadastro_sala
+	url = https://github.com/samsepiol1/angular_cadastro_sala.git
